@@ -153,6 +153,7 @@ body {
     grid-column: 2;
     font-size: large;
     border: 2px solid black;
+    cursor: pointer;
   }
 
   /* product specs */
@@ -180,11 +181,12 @@ body {
   th{
     background-color: #1C1B1F;
   }
-
+  
   /* slide thing 2? */
 .container {
   position: relative;
-  
+  margin-left: 10%;
+  width: 200px;
   
 }
 
