@@ -1,33 +1,35 @@
 
 <?php
 
-    class dbconnection extends PDO {
-        private $host = "localhost";
-        private $dbname = "Webshop";
-        private $user = "root";
-        private $pass = "root";
+    require "../dev/src/helpers/Database.php";
 
-        public function __construct()
-        {
-            parent::__construct("mysql:host=" . $this->host . ";dbname=" . $this->dbname . "; charset=utf8", $this->user, $this->pass);
-            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        }
+
+
+$host = 'localhost';
+$db = 'webshop';
+$user = 'Admin';
+$password = 'vSb20ieI_M.7)[T2';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=UTF8";
+
+
+try {
+    $pdo = new PDO($dsn, $user, $password);
+
+    if ($pdo) {
+        echo "Connected to the $db database successfully!";
     }
+} catch (PDOException $e) {
+    echo $e->getMessage();
+};
 
+    $stmt = $pdo ->query('SELECT * FROM users');
 
-    $db = new dbconnection();
+    $row = $stmt -> fetch(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT * FROM users";
+    echo "<br>" . $row['Username'];
 
-    $query = $db->prepare($sql);
-
-    $query->execute();
-
-    $recset = $query -> fetchAll(PDO::FETCH_ASSOC);
-
-
-
-    $chosenindex = random_int(0, 10)
-
-    ?>
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "<p>" . $row['Username'] . "</p>";
+    }
+   ?>
