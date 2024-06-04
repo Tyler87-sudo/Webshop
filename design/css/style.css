@@ -244,35 +244,57 @@ th {
   opacity: 1;
 }
 
-/* Login Page */
-.logInField {
+/* Login and Register Pages */
+.logInField, .registerField {
   border: 4px solid #000;
   width: 85%;
-  height: 70vh;
+  max-width: 500px;
+  margin: 50px auto;
+  height: auto;
   border-radius: 5%;
-  padding-left: 10%;
+  padding: 20px 10%;
+  box-sizing: border-box;
 }
 
 .title {
   text-align: center;
   font-style: italic;
   font-weight: bolder;
+  margin-bottom: 1rem; 
 }
 
-#username, #password {
+#registerForm label, #loginForm label {
+  display: block;
+  margin: 10px 0 5px;
+  margin-left: -40%;
+}
+
+#registerForm input, #loginForm input {
   border-radius: 50vh;
   border: none;
   height: 4vh;
-  width: 65vw;
+  width: 200%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  margin-left: -70px;
 }
 
-#login {
+#registerButton, #login {
   font-family: 'Poppins', sans-serif;
   font-style: italic;
-  margin-left: 25%;
-  width: 30vw;
+  width: 100%;
   height: 5vh;
-  transform: scale(1.4);
+  transform: scale(1.1);
+  border: none;
+  background-color: #F7A325;
+  color: #0A192F;
+  cursor: pointer;
+  border-radius: 50vh;
+}
+
+#registerButton:hover, #login:hover {
+  background-color: #e69524;
 }
 
 /* Category */
@@ -565,7 +587,7 @@ th {
 
   #login {
     font-family: 'Poppins', sans-serif;
-    font-style: italic;
+    font-style: italico;
     margin-left: 25%;
     width: 30vw;
     height: 5vh;
@@ -605,5 +627,19 @@ th {
     border-radius: 1vh;
     width: fit-content;
     height: 6vh;
+  }
+
+  .logInField, .registerField {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #registerForm input, #loginForm input {
+    width: 90%;
+  }
+
+  #registerButton, #login {
+    width: 90%;
   }
 }

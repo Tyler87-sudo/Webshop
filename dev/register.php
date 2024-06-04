@@ -1,3 +1,45 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = ""; 
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$username = $_POST['username'];
+$email = $_POST['email'];
+$address = $_POST['address'];
+$postcode = $_POST['postcode'];
+$birthday = $_POST['birthday'];
+$password = $_POST['password'];
+$passwordConfirm = $_POST['passwordConfirm'];
+
+if (empty($username) || empty($email) || empty($address) || empty($postcode) || empty($birthday) || empty($password) || empty($passwordConfirm)) {
+    die("All fields are required.");
+}
+
+if ($password !== $passwordConfirm) {
+    die("Passwords do not match.");
+}
+
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO users (username, email, address, postcode, birthday, password) VALUES ('$username', '$email', '$address', '$postcode', '$birthday', '$hashedPassword')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Registration successful!";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
