@@ -36,12 +36,15 @@
         <div class="logInField">
             <h1 class="title">Log in</h1>
             <br><br>
-            <p><i><strong>Username</strong></i></p>
-            <input type="text" id="username">
-            <p><i><strong>Password</strong></i></p>
-            <input type="password" id="password">
-            <br><br><br><br><br><br>
+            <label for="username"><strong>Username</strong></label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+            <label for="password"><strong>Password</strong></label>
+            <input type="password" id="password" name="password" required>
+
+            <br><br><br><br>
             <button onclick="logIn()" id="login"><b>Log in</b></button>
+            <a href="register.html">I don't have a account</a>
 
         </div>
     </main>
