@@ -1,14 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = ""; 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once '../dev/src/formhandlers/register.php';
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$sql = 'SELECT * FROM users';
+
+Database::query($sql);
+$product = Database::get();
 
 $username = $_POST['username'];
 $email = $_POST['email'];
@@ -30,13 +27,6 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO users (username, email, address, postcode, birthday, password) VALUES ('$username', '$email', '$address', '$postcode', '$birthday', '$hashedPassword')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Registration successful!";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
 ?>
 
 
@@ -49,27 +39,10 @@ $conn->close();
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- nav start -->
-    <div class="nav">
-        <img src="img/icons/menu.svg" id="menu_butt">
-        <div id="slide_menu">
-            <img src="img/Logo.png" class="Logo" width="100%" height="100%">
-            <a href="index.html">Home</a>
-            <a href="guit_bass.html">Guitar/Bass</a>
-            <a href="amps.html">AMP's</a>
-            <a href="pedals.html">Pedals</a>
-            <div class="copy">&copy; The Crazy String 2024</div>
-        </div>
-        <a href="index.html">
-            <img src="img/icons/home.svg" alt="Home">
-        </a>
-        <input type="text" placeholder="Search...">
-        <img src="img/icons/shopping_cart_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="cart" alt="Cart">
-        <a href="log_in.html">
-            <img src="img/icons/account_circle.svg" id="account" alt="Account">
-        </a>
-    </div>
-    <!-- nav end -->
+</body>
+<?php
+require_once "dev/templates/header.inc.php"
+?>
 
     <!-- main start -->
     <main>
