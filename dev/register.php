@@ -7,13 +7,13 @@ $sql = 'SELECT * FROM users';
 Database::query($sql);
 $product = Database::get();
 
-$username = $_POST['username'];
-$email = $_POST['email'];
-$address = $_POST['address'];
-$postcode = $_POST['postcode'];
-$birthday = $_POST['birthday'];
-$password = $_POST['password'];
-$passwordConfirm = $_POST['passwordConfirm'];
+$username = htmlentities($_POST['username']);
+$email = htmlentities($_POST['email']);
+$address = htmlentities($_POST['address']);
+$postcode = htmlentities($_POST['postcode']);
+$birthday = htmlentities($_POST['birthday']);
+$password = htmlentities($_POST['password']);
+$passwordConfirm = htmlentities($_POST['passwordConfirm']);
 
 if (empty($username) || empty($email) || empty($address) || empty($postcode) || empty($birthday) || empty($password) || empty($passwordConfirm)) {
     die("All fields are required.");
@@ -25,7 +25,8 @@ if ($password !== $passwordConfirm) {
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO users (username, email, address, postcode, birthday, password) VALUES ('$username', '$email', '$address', '$postcode', '$birthday', '$hashedPassword')";
+$sql = "INSERT INTO `users` (`username`, `email`, `address`, `postcode`, `birthday`, `password`) 
+VALUES (:username, :email, :address, :postcode, :birthday, :hashedPassword)";
 
 ?>
 
