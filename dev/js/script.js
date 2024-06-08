@@ -31,7 +31,7 @@ function showSlideMenu() {
 
 function hideSlideMenu() {
   const slideMenu = document.getElementById('slide_menu');
-  slideMenu.style.left = '-200px';
+  slideMenu.style.left = '-9000px';
 }
 
 // Check on load

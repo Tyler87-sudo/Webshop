@@ -29,8 +29,9 @@
       <h1 class="underline">Spotlight</h1>
       <div class="container" id="container-sale">
           <?php foreach ($products as $product) : ?>
-        <a href="product.php?product_id=<?= $product['product_id'] ?>">
-          <img src=<?php echo $product['product_image_url']?>>
+              <a href="product.php?product_id=<?= $product['product_id'] ?>">
+                  <img src="<?php echo $product['product_image_url']?>">
+              </a>
           <?php endforeach; ?>
       </div>
       <div class="categories">

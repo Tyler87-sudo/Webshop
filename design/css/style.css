@@ -132,7 +132,7 @@ h1 {
 #productImage {
   grid-column: 1 / span 2;
   grid-row: 1;
-  height: 10%;
+  height: 40vh;
   margin-left: 25%;
 }
 
@@ -309,14 +309,6 @@ th {
 .productImg {
   grid-row: 1 / span 2;
   grid-column: 1;
-  height: 100%;
-  width: 4vw;
-}
-
-.productImg:hover{
-  scale: 5;
-  transition: 500ms;
-  margin-left: 45%;
 }
 
 .productName {
@@ -328,7 +320,7 @@ th {
 .description {
   grid-column: 2;
   grid-row: 2;
-  font-size: 15px;
+  font-size: 10px;
 }
 
 .catOrder {

@@ -1,6 +1,6 @@
 <div class="nav">
     <img src="img/icons/menu.svg" id="menu_butt">
-    <div id="slide_menu">
+    <div id="slide_menu" class="NonAnimation">
       <img src="../dev/img/Logo.png" class="logo" style="width=100%;" >
       <a href="index.php">Home</a>
       <a href="guit_bass.php">Guitar/Bass</a>
