@@ -31,6 +31,7 @@ body {
 .nav img {
   height: 6vh;
   cursor: pointer;
+  width: 10vw;
 }
 
 .nav input {
@@ -67,6 +68,7 @@ body {
   width: 80%;
   height: auto;
   margin: 20px 0;
+  max-width: 80%;
 }
 
 #slide_menu a {
@@ -278,7 +280,6 @@ th {
 /* Category */
 .product {
   border: 2px solid #000;
-  height: 15vh;
   display: grid;
   grid-template-columns: 25% 55% 15%;
   grid-template-rows: 50% 50%;
@@ -324,12 +325,6 @@ th {
     z-index: 1;
   }
   
-  #slide_menu .logo {
-    max-width: 80%;
-    height: auto;
-    margin-bottom: 20px;
-  }
-  
   #slide_menu a {
     color: #0A192F;
     text-decoration: none;
@@ -352,11 +347,6 @@ th {
     display: grid;
     grid-template-columns: 15vw 15vw 40vw 15vw 15vw;
     place-items: center;
-  }
-
-  .nav img {
-    height: 10vh;
-    width: 10vw;
   }
 
   .nav input {
@@ -397,11 +387,6 @@ th {
 
   .nav:hover #slide_menu {
     left: 0;
-  }
-
-  #slide_menu .Logo {
-    width: 20vw;
-    height: 15vh;
   }
 
   .copy {

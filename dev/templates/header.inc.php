@@ -1,7 +1,7 @@
 <div class="nav">
     <img src="img/icons/menu.svg" id="menu_butt">
     <div id="slide_menu">
-      <img src="../dev/images/Logo.png" class="logo" width="100%" height="100%">
+      <img src="../dev/img/Logo.png" class="logo" style="width=100%;" >
       <a href="index.php">Home</a>
       <a href="guit_bass.php">Guitar/Bass</a>
       <a href="amps.php">AMP's</a>
@@ -13,7 +13,7 @@
     </a>
     <input type="text" placeholder="Search...">
     <img src="img/icons/shopping_cart_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="cart">
-    <a href="log_in.html">
+    <a href="log_in.php">
       <img src="img/icons/account_circle.svg" id="account">
     </a>
   </div>

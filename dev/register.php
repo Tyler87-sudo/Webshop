@@ -1,36 +1,3 @@
-<?php
-
-require_once '../dev/src/formhandlers/register.php';
-
-$sql = 'SELECT * FROM users';
-
-Database::query($sql);
-$product = Database::get();
-
-$username = htmlentities($_POST['username']);
-$email = htmlentities($_POST['email']);
-$address = htmlentities($_POST['address']);
-$postcode = htmlentities($_POST['postcode']);
-$birthday = htmlentities($_POST['birthday']);
-$password = htmlentities($_POST['password']);
-$passwordConfirm = htmlentities($_POST['passwordConfirm']);
-
-if (empty($username) || empty($email) || empty($address) || empty($postcode) || empty($birthday) || empty($password) || empty($passwordConfirm)) {
-    die("All fields are required.");
-}
-
-if ($password !== $passwordConfirm) {
-    die("Passwords do not match.");
-}
-
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-$sql = "INSERT INTO `users` (`username`, `email`, `address`, `postcode`, `birthday`, `password`) 
-VALUES (:username, :email, :address, :postcode, :birthday, :hashedPassword)";
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,14 +9,14 @@ VALUES (:username, :email, :address, :postcode, :birthday, :hashedPassword)";
 <body>
 </body>
 <?php
-require_once "dev/templates/header.inc.php"
+require_once "../dev/templates/header.inc.php"
 ?>
 
     <!-- main start -->
     <main>
         <div class="registerField">
             <h1 class="title">Register</h1>
-            <form id="registerForm">
+            <form method="POST" id="registerForm" action="../dev/src/formhandlers/register.php">
                 <label for="username"><strong>Username</strong></label>
                 <input type="text" id="username" name="username" required>
 
@@ -71,7 +38,7 @@ require_once "dev/templates/header.inc.php"
                 <label for="passwordConfirm"><strong>Confirm Password</strong></label>
                 <input type="password" id="passwordConfirm" name="passwordConfirm" required>
                 <br><br><br>
-                <button type="button" onclick="register()" id="registerButton"><b>Register</b></button>
+                <button  type="submit" onclick="" id="registerButton"><b>Register</b></button>
             </form>
         </div>
     </main>
