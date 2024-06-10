@@ -50,6 +50,7 @@ $conn->close();
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<<<<<<< Updated upstream
     <!-- nav start -->
     <div class="nav">
         <img src="img/icons/menu.svg" id="menu_butt">
@@ -72,6 +73,11 @@ $conn->close();
     </div>
     <!-- nav end -->
 
+=======
+<?php
+require_once "../dev/templates/header.inc.php";
+?>
+>>>>>>> Stashed changes
     <!-- main start -->
     <main>
         <div class="registerField">
@@ -86,7 +92,7 @@ $conn->close();
                 <label for="address"><strong>Address</strong></label>
                 <input type="text" id="address" name="address" required>
 
-                <label for="postcode"><strong>Postcode</strong></label>
+                <label for="postcode"><strong>Zip code</strong></label>
                 <input type="text" id="postcode" name="postcode" required>
 
                 <label for="birthday"><strong>Birthday</strong></label>
@@ -98,12 +104,15 @@ $conn->close();
                 <label for="passwordConfirm"><strong>Confirm Password</strong></label>
                 <input type="password" id="passwordConfirm" name="passwordConfirm" required>
                 <br><br><br>
+<<<<<<< Updated upstream
                 <button type="button" onclick="register()" id="registerButton"><b>Register</b></button>
+=======
+                <button type="submit" id="registerButton"><b>Register</b></button>
+>>>>>>> Stashed changes
             </form>
         </div>
     </main>
     <!-- main end -->
-
     <script src="js/script.js"></script>
 </body>
 </html>
