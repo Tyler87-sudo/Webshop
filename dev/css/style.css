@@ -277,18 +277,23 @@ th {
   transform: scale(1.4);
 }
 
-/* Category */
-.product {
-  border: 2px solid #000;
-  display: grid;
-  grid-template-columns: 25% 55% 15%;
-  grid-template-rows: 50% 50%;
+#login2{
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  margin-left: 25%;
+  width: 30vw;
+  height: 5vh;
+  transform: scale(1.4);
+  margin-top: 3%;
+  text-decoration: none;
+  a{
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+  }
 }
 
-.productImg {
-  grid-row: 1 / span 2;
-  grid-column: 1;
-}
+/* Category */
 
 .productName {
   grid-column: 2;
@@ -311,11 +316,50 @@ th {
   height: 6vh;
 }
 
+/* register */
+.registerField, .logInField {
+  border: 4px solid #000;
+  width: 85%;
+  height: auto;
+  border-radius: 5%;
+  padding: 2%;
+  margin: 0 auto;
+  
+}
+
+.title {
+  text-align: center;
+  font-style: italic;
+  font-weight: bolder;
+}
+
+#username, #password, #email, #address, #postcode, #birthday, #passwordConfirm {
+  border-radius: 50vh;
+  border: none;
+  height: 4vh;
+  width: 65vw;
+  margin-bottom: 1rem;
+  display: block;
+  padding-left: 1rem;
+}
+
+#registerButton, #login {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  margin: 0 auto;
+  width: 30vw;
+  height: 5vh;
+  transform: scale(1.4);
+  display: block;
+  text-align: center;
+}
+
 /* Media Queries */
 @media only screen and (max-width: 800px) {
   #slide_menu {
-    position: absolute;
+    position: fixed; /* Use fixed positioning to keep it within the viewport */
     top: 0;
+    left: -40vw; /* Adjust left position to be fully hidden when closed */
     width: 40vw;
     height: 100vh;
     background-color: #F7A325;
@@ -323,30 +367,19 @@ th {
     flex-direction: column;
     align-items: center;
     z-index: 1;
+    transition: left 0.3s;
   }
   
-  #slide_menu a {
-    color: #0A192F;
-    text-decoration: none;
-    padding: 15px 0;
-    font-size: 1.2rem;
-    border-bottom: 1px solid #0A192F;
-  }
-  
-  #slide_menu a:hover {
-    color: #0A192F;
-    opacity: 0.8;
-  }
-
   .nav {
     height: 10vh;
     background-color: #F7A325;
-    width: 105.4%;
-    margin-left: -2.9%;
-    margin-top: -2.9%;
+    width: 100vw; /* Adjust width to 100vw */
     display: grid;
     grid-template-columns: 15vw 15vw 40vw 15vw 15vw;
     place-items: center;
+    box-sizing: border-box; /* Add box-sizing to include padding and border in width */
+    padding: 0 2%;
+    margin: 0;
   }
 
   .nav input {
@@ -354,24 +387,27 @@ th {
     height: 5vh;
     border-radius: 14px;
     border: none;
+    box-sizing: border-box;
   }
 
-  .nav input::placeholder {
-    font-style: italic;
-    font-weight: 600;
-    color: #000;
-    font-family: 'Poppins', sans-serif;
-    margin-left: 10%;
-    text-align: center;
+  .nav:hover #slide_menu {
+    left: 0; /* Ensure the menu slides in correctly */
   }
 
-  div.container {
+  /* Additional CSS for other elements */
+  .copy {
+    margin-top: 170%;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  .container {
     overflow: hidden;
     white-space: nowrap;
     padding: 10px;
   }
 
-  div.container img {
+  .container img {
     padding: 10px;
     display: inline-block;
   }
@@ -385,17 +421,6 @@ th {
     font-family: 'Poppins', sans-serif;
   }
 
-  .nav:hover #slide_menu {
-    left: 0;
-  }
-
-  .copy {
-    margin-top: 170%;
-    font-size: 12px;
-    opacity: 0.6;
-  }
-
-  /* product page */
   .productThing {
     display: grid;
     grid-template-columns: 55vw 30vw;
@@ -431,7 +456,6 @@ th {
     cursor: pointer;
   }
 
-  /* product specs */
   .specTitle {
     text-align: center;
   }
@@ -458,7 +482,6 @@ th {
     background-color: #1C1B1F;
   }
 
-  /* slide thing 2? */
   .container {
     position: relative;
     margin-left: 10%;
@@ -524,9 +547,6 @@ th {
     opacity: 1;
   }
 
-  /*  */
-
-  /* login page */
   .logInField {
     border: 4px solid #000;
     width: 85%;
@@ -557,7 +577,15 @@ th {
     scale: 1.4;
   }
 
-  /* category */
+  #login {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    margin-left: 25%;
+    width: 30vw;
+    height: 5vh;
+    scale: 1.4;
+  }
+
   .product {
     border: 2px solid #000;
     height: 15vh;
@@ -569,12 +597,6 @@ th {
   .productImg {
     grid-row: 1 / span 2;
     grid-column: 1;
-  }
-
-  .productName {
-    grid-column: 2;
-    grid-row: 1;
-    font-style: italic;
   }
 
   .description {
@@ -590,5 +612,18 @@ th {
     border-radius: 1vh;
     width: fit-content;
     height: 6vh;
+  }
+
+  .registerField, .logInField {
+    width: 95%;
+    padding: 10%;
+  }
+
+  #username, #password, #email, #address, #postcode, #birthday, #passwordConfirm {
+    width: 80vw;
+  }
+
+  #registerButton, #login {
+    width: 40vw;
   }
 }

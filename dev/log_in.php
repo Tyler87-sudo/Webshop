@@ -23,7 +23,9 @@
             <br><br><br><br><br><br>
             <button onclick="logIn()" id="login"><b>Log in</b></button>
             <br>
-            <a href="register.php">I don't have an account</a>
+            <button id="login2">
+                <a href="register.php">I don't have an account</a>
+            </button>
         </div>
     </main>
     <!-- main eind -->
