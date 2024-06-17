@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = ""; 
+$dbname = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -43,41 +43,20 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<<<<<<< Updated upstream
-    <!-- nav start -->
-    <div class="nav">
-        <img src="img/icons/menu.svg" id="menu_butt">
-        <div id="slide_menu">
-            <img src="img/Logo.png" class="Logo" width="100%" height="100%">
-            <a href="index.html">Home</a>
-            <a href="guit_bass.html">Guitar/Bass</a>
-            <a href="amps.html">AMP's</a>
-            <a href="pedals.html">Pedals</a>
-            <div class="copy">&copy; The Crazy String 2024</div>
-        </div>
-        <a href="index.html">
-            <img src="img/icons/home.svg" alt="Home">
-        </a>
-        <input type="text" placeholder="Search...">
-        <img src="img/icons/shopping_cart_24dp_FILL0_wght400_GRAD0_opsz24.svg" id="cart" alt="Cart">
-        <a href="log_in.html">
-            <img src="img/icons/account_circle.svg" id="account" alt="Account">
-        </a>
-    </div>
-    <!-- nav end -->
 
-=======
-<?php
-require_once "../dev/templates/header.inc.php";
-?>
->>>>>>> Stashed changes
+<body>
+    <?php
+    require_once "../dev/templates/header.inc.php";
+    require_once "../dev/src/Database/Database.php";
+
+    ?>
     <!-- main start -->
     <main>
         <div class="registerField">
@@ -104,15 +83,12 @@ require_once "../dev/templates/header.inc.php";
                 <label for="passwordConfirm"><strong>Confirm Password</strong></label>
                 <input type="password" id="passwordConfirm" name="passwordConfirm" required>
                 <br><br><br>
-<<<<<<< Updated upstream
                 <button type="button" onclick="register()" id="registerButton"><b>Register</b></button>
-=======
-                <button type="submit" id="registerButton"><b>Register</b></button>
->>>>>>> Stashed changes
             </form>
         </div>
     </main>
     <!-- main end -->
     <script src="js/script.js"></script>
 </body>
+
 </html>

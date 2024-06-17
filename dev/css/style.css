@@ -280,7 +280,7 @@ th {
 #login2{
   font-family: 'Poppins', sans-serif;
   font-style: italic;
-  margin-left: 25%;
+  margin-left: 30.3%;
   width: 30vw;
   height: 5vh;
   transform: scale(1.4);
@@ -354,6 +354,94 @@ th {
   text-align: center;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #112240;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.box {
+  flex: 1;
+  padding: 1rem;
+  background-color: #0A192F;
+  border: 2px solid #F7A325;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.order-summary h2,
+.user-info h2,
+.payment-details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #F7A325;
+}
+
+.order-summary p,
+.user-info p,
+.payment-details p {
+  margin: 0.5rem 0;
+  color: #cccccc;
+}
+
+.user-info label,
+.payment-details label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #F7A325;
+}
+
+.user-info input,
+.payment-details select {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  padding: 0 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  background-color: #112240;
+  color: #cccccc;
+}
+
+.confirm-button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: #F7A325;
+  color: #0A192F;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.confirm-button:hover {
+  background-color: #e69500;
+}
+
+/* Ensure boxes have the same height */
+.container {
+  align-items: stretch;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 /* Media Queries */
 @media only screen and (max-width: 800px) {
   #slide_menu {
@@ -369,6 +457,7 @@ th {
     z-index: 1;
     transition: left 0.3s;
   }
+  
   
   .nav {
     height: 10vh;
