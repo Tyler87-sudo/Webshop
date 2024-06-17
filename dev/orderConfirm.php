@@ -11,7 +11,7 @@
 <body>
     <?php
     require_once "../dev/src/Database/Database.php";
-    include "../dev/templates/header.inc.php";
+    require_once "../dev/templates/header.inc.php";
     ?>
     <main>
         <h1>Order Confirmation</h1>

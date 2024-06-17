@@ -1,6 +1,11 @@
 <?php
 require_once "../../src/Database/Database.php";
 
+if($_SERVER['REQUEST_METHOD'] != 'POST') {
+    header('Location: ../../register.php');
+    exit();
+}
+
 $username = $_POST['username'];
 $email = $_POST['email'];
 $birthday = $_POST['birthday'];
@@ -17,11 +22,9 @@ if ($password !== $passwordConfirm) {
     die("Passwords do not match.");
 }
 
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
 $sql =
     "INSERT INTO customers (username, email, address, postcode, birthday, password) 
-    VALUES (:username, :email, :address, :postcode, :birthday, :hashedPassword)"
+    VALUES (:username, :email, :address, :postcode, :birthday, :password)"
 ;
 
 $placeholders = [
@@ -30,7 +33,7 @@ $placeholders = [
     ':birthday' => $birthday,
     ':address' => $address,
     ':postcode' => $postcode,
-    ':password' => $hashedPassword,
+    ':password' => password_hash($password, PASSWORD_DEFAULT),
 ];
 
 Database::query($sql, $placeholders);

@@ -9,7 +9,7 @@ class Database {
     private static $dbConnection = null;
     private static $dbStatement = null;
 
-    private static function connect()
+    public static function connect()
     {
         try {
             self::$dbConnection = new PDO(
@@ -20,7 +20,7 @@ class Database {
 
     public static function query(string $sql, array $placeholders = []) {
 
-        if (is_null(self::$dbConnection)) { 
+        if (is_null(self::$dbConnection)) {
             self::connect();
         }
 

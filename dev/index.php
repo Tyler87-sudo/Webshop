@@ -1,7 +1,5 @@
 <?php
-
-    include "../dev/templates/header.inc.php"; 
-    include "../dev/templates/footer.inc.php";
+    require_once "../dev/templates/header.inc.php";
     require_once "../dev/src/Database/Database.php";
 ?>
 
@@ -15,13 +13,25 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    
+
 <?php
-      $type = "Electric Guitar";
-    Database::query("SELECT * FROM products WHERE product_type = '$type'");
-    $products = Database::getAll();
-    Database::query("SELECT * FROM products");
-    $x = Database::get();
+session_start();
+
+if (isset($_SESSION['messages']['login_success'])) {
+    echo "<p>" . $_SESSION['messages']['login_success'] . "</p>";
+    unset($_SESSION['messages']['login_success']);
+}
+
+if (isset($_SESSION['messages']['user'])) {
+    echo "<h1>" . "Welkom, " . $_SESSION['messages']['user'] . "!" . "</h1>";
+}
+
+$type = "Electric Guitar";
+Database::query("SELECT * FROM products WHERE product_type = '$type'");
+$products = Database::getAll();
+Database::query("SELECT * FROM products");
+$x = Database::get();
+
 ?>
 
 <main>
