@@ -12,9 +12,12 @@
 <?php
 session_start();
 
-require_once "../dev/src/Database/Database.php";
 require_once "../dev/templates/header.inc.php";
-require_once "../dev/src/helpers/sessionmanager.php";
+require_once "../dev/src/helpers/Auth.php";
+
+if (isset($_SESSION['messages']['loggedin']) && $_SESSION['messages']['loggedin'] === true) {
+    echo "<h1>" . "You are already logged in, " . $_SESSION['messages']['user'] . "!" . "</h1>";
+}
 
 
 if (isset($_SESSION['messages']['passworderror'])) {

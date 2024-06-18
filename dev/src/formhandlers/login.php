@@ -8,12 +8,21 @@ header('Location: ../../login.php');
 exit();
 }
 
-if (guest())
+
+if (!isset($_SESSION['messages'])) {
+    $_SESSION['messages'] = [];
+}
 
 $_SESSION['messages']['loggedin'] = false;
 
-if ($_SESSION['messages']['loggedin']) {
+
+if (isset($_SESSION['messages']['loggedin']) && $_SESSION['messages']['loggedin'] == true) {
     echo "<h1>" . "You are already logged in, " . $_SESSION['messages']['user'] . "</h1>";
+    header('Location: ../../index.php');
+    exit();
+} else {
+    echo "<h1>" . "Please login!" . "</h1>";
+
 }
 
 $password = htmlentities($_POST['password']);
@@ -25,17 +34,16 @@ $placeholders = array(':email' => $email);
 
 Database::query($sql, $placeholders);
 
-$customer = Database::get();
+$user = Database::get();
 
-echo $customer['username'];
-
-if (empty($customer)) {
+if (empty($user)) {
 $_SESSION['messages']['error'] = "Email does not exist. Please register!";
 header('Location: ../../register.php');
 exit();
 }
 
-$customerpassword = $customer['password'];
+
+$customerpassword = $user['password'];
 
 if (!password_verify("$password", $customerpassword)) {
 $_SESSION['messages']['passworderror'] = "Invalid password!";
@@ -43,13 +51,14 @@ header('Location: ../../login.php');
 exit();
 }
 
-$_SESSION['customer'] = $customer;
-unset($_SESSION['customer']['password']);
+
+$_SESSION['user'] = $user;
+unset($_SESSION['user']['password']);
 
 $_SESSION['messages']['login_success'] = "You have successfully logged in.";
-$_SESSION['messages']['user'] = $customer['username'];
+$_SESSION['messages']['user'] = $user['username'];
 $_SESSION['messages']['loggedin'] = true;
+
 header('Location: ../../index.php');
 exit();
-
 ?>

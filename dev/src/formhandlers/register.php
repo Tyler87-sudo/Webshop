@@ -14,6 +14,21 @@ $postcode = $_POST['postcode'];
 $password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
 
+$sql = "SELECT * FROM users WHERE email = :email";
+$placeholders = array(':email' => $email);
+
+Database::query($sql, $placeholders);
+
+$user = Database::get();
+
+if ($user['username'] === $username) {
+    $_SESSION['messages']['userexist'] = "User already exists";
+    header('Location: ../../register.php');
+    exit();
+}
+
+
+
 if ($password !== $passwordConfirm) {
     die("Passwords do not match.");
 }

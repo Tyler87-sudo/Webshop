@@ -13,7 +13,7 @@ session_start();
 
 require_once "../dev/src/Database/Database.php";
 require_once "../dev/templates/header.inc.php";
-require_once "../dev/src/helpers/sessionmanager.php";
+require_once "../dev/src/helpers/Auth.php";
 
 if (isset($_SESSION['messages']['user'])) {
     echo "<h1>" . "Welkom, " . $_SESSION['messages']['user'] . "!" . "</h1>";

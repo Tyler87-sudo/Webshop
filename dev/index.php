@@ -14,7 +14,7 @@ session_start();
 
 require_once "../dev/templates/header.inc.php";
 require_once "../dev/src/Database/Database.php";
-require_once "../dev/src/helpers/sessionmanager.php";
+require_once "../dev/src/helpers/Auth.php";
 
 if (isset($_SESSION['messages']['login_success'])) {
     echo "<p>" . $_SESSION['messages']['login_success'] . "</p>";
@@ -28,8 +28,6 @@ if (isset($_SESSION['messages']['user'])) {
 $type = "Electric Guitar";
 Database::query("SELECT * FROM products WHERE product_type = '$type'");
 $products = Database::getAll();
-Database::query("SELECT * FROM products");
-$x = Database::get();
 
 ?>
 
@@ -47,8 +45,8 @@ $x = Database::get();
         <h1 class="underline">Categories</h1>
         <div class="container" id="container-categories">
           <a href="guit_bass.php"><img src="<?php echo $product['product_image_url']?>"</a>
-          <a href="amps.php"><img src="img/producten/katana_1.png"></a>
-          <a href="pedals.php"><img src="img/producten/cry_1.png"></a>
+          <a href="amps.php"><img src="img/katana_1.png"></a>
+          <a href="pedals.php"><img src="img/cry_1.png"></a>
         </div>
       </div>
 

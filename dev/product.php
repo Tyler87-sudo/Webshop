@@ -3,7 +3,7 @@ session_start();
 
 require_once '../dev/src/Database/Database.php';
 require_once "../dev/templates/header.inc.php";
-require_once "../dev/src/helpers/sessionmanager.php";
+require_once "../dev/src/helpers/Auth.php";
 
 if(!isset($_GET['product_id'])) {
     header('Location: index.php');
@@ -63,7 +63,11 @@ $product = Database::getAll();
 
             <h1 class="Anton" id="product"><?= $product[0]['product_name']?></h1>
             <h2 class="Anton" id="price">&euro;<?= $product[0]['price']?></h2>
-            <button onclick="order()" id="order"><strong>ORDER</strong></button>
+            <form id="order" action="../dev/src/formhandlers/addtocart.php" method="post">
+                <input type="hidden" name="product_id" value="<?= $product[0]['product_id'] ?>">
+                <input type="number" name="quantity" value="1" min="1">
+                <button id="order" type="submit"><strong>Add to cart</strong></button>
+            </form>
         </div>
         <div class="specsTab">
             <h3 class="specTitle">Specifications</h3>

@@ -13,7 +13,7 @@
 
 require_once "../dev/src/Database/Database.php";
 require_once "../dev/templates/header.inc.php";
-require_once "../dev/src/helpers/sessionmanager.php";
+require_once "../dev/src/helpers/Auth.php";
 
 session_start();
 if (isset($_SESSION['messages']['user'])) {

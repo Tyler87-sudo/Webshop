@@ -9,9 +9,17 @@
 <body>
 </body>
 <?php
-require_once "../dev/templates/header.inc.php";
+
+if (isset($_SESSION['messages']['userexist'])) {
+    echo "<p>" . $_SESSION['messages']['userexist'] . "</p>";
+    unset($_SESSION['messages']['userexist']);
+}
 
 session_start();
+
+require_once "../dev/templates/header.inc.php";
+require_once "../dev/src/Database/Database.php";
+
 
 if (isset($_SESSION['messages']['error'])) {
     echo "<p>" . $_SESSION['messages']['error'] . "</p>";
