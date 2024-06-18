@@ -8,10 +8,17 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<?php 
+<?php
+session_start();
 
 require_once "../dev/src/Database/Database.php";
-include "../dev/templates/header.inc.php";
+require_once "../dev/templates/header.inc.php";
+require_once "../dev/src/helpers/sessionmanager.php";
+
+if (isset($_SESSION['messages']['user'])) {
+    echo "<h1>" . "Welkom, " . $_SESSION['messages']['user'] . "!" . "</h1>";
+}
+
 $electric = "Electric Guitar";
 $bass = "Bass Guitar";
 Database::query("SELECT * FROM products WHERE product_type = '$electric' OR product_type = '$bass'");

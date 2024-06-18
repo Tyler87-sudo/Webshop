@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+require_once '../dev/src/Database/Database.php';
+require_once "../dev/templates/header.inc.php";
+require_once "../dev/src/helpers/sessionmanager.php";
 
 if(!isset($_GET['product_id'])) {
     header('Location: index.php');
@@ -7,18 +12,13 @@ if(!isset($_GET['product_id'])) {
 
 $product_id = intval($_GET['product_id']);
 
-require_once '../dev/src/Database/Database.php';
+
 $sql = 'SELECT * FROM products WHERE product_id = :product_id';
 $placeholders = [ ':product_id' => $product_id ];
 
 Database::query($sql, $placeholders);
 $product = Database::getAll();
 
-print_r($product[0]);
-foreach ($product as $products)
-    echo $product[0]['product_image_url'];
-
-include "../dev/templates/header.inc.php"
 ?>
 
 <!DOCTYPE html>
@@ -69,19 +69,7 @@ include "../dev/templates/header.inc.php"
             <h3 class="specTitle">Specifications</h3>
             <table id="specs">
                 <tr>
-                    <td id="specTab1">Lorum</td>
-                </tr>
-                <tr>
-                    <th id="specTab2">Lorum</th>
-                </tr>
-                <tr>
-                    <td id="specTab3">Lorum</td>
-                </tr>
-                <tr>
-                    <th id="specTab4">Lorum</th>
-                </tr>
-                <tr>
-                    <td id="specTab5">Lorum</td>
+                    <td id="specTab1"><?= $product[0]['product_specs']?></td>
                 </tr>
             </table>
         </div>

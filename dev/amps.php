@@ -10,14 +10,21 @@
 
 <?php
 
+
 require_once "../dev/src/Database/Database.php";
-include "../dev/templates/header.inc.php";
+require_once "../dev/templates/header.inc.php";
+require_once "../dev/src/helpers/sessionmanager.php";
+
+session_start();
+if (isset($_SESSION['messages']['user'])) {
+    echo "<h1>" . "Welkom, " . $_SESSION['messages']['user'] . "!" . "</h1>";
+}
+
 Database::query("SELECT * FROM products WHERE product_type = 'AMP'");
 $products = Database::getAll();
 ?>
 
 <body>
-    <?php require_once "templates/header.inc.php";?>
     <!-- Main start -->
     <main>
         <br>

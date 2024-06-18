@@ -14,16 +14,12 @@ $postcode = $_POST['postcode'];
 $password = $_POST['password'];
 $passwordConfirm = $_POST['passwordConfirm'];
 
-if (empty($username) || empty($email) || empty($address) || empty($postcode) || empty($birthday) || empty($password) || empty($passwordConfirm)) {
-    die("All fields are required.");
-}
-
 if ($password !== $passwordConfirm) {
     die("Passwords do not match.");
 }
 
 $sql =
-    "INSERT INTO customers (username, email, address, postcode, birthday, password) 
+    "INSERT INTO users (username, email, address, postcode, birthday, password) 
     VALUES (:username, :email, :address, :postcode, :birthday, :password)"
 ;
 

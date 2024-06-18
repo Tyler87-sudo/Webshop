@@ -1,8 +1,3 @@
-<?php
-    require_once "../dev/templates/header.inc.php";
-    require_once "../dev/src/Database/Database.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +11,10 @@
 
 <?php
 session_start();
+
+require_once "../dev/templates/header.inc.php";
+require_once "../dev/src/Database/Database.php";
+require_once "../dev/src/helpers/sessionmanager.php";
 
 if (isset($_SESSION['messages']['login_success'])) {
     echo "<p>" . $_SESSION['messages']['login_success'] . "</p>";

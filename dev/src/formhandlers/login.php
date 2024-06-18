@@ -8,19 +8,19 @@ header('Location: ../../login.php');
 exit();
 }
 
-if (!guest) {
-    
+if (guest())
+
+$_SESSION['messages']['loggedin'] = false;
+
+if ($_SESSION['messages']['loggedin']) {
+    echo "<h1>" . "You are already logged in, " . $_SESSION['messages']['user'] . "</h1>";
 }
 
 $password = htmlentities($_POST['password']);
 $email = htmlentities($_POST['email']);
 
-//
-//if (empty($email) || empty($password)) {
-//die("All Fields are required");
-//}
 
-$sql = "SELECT * FROM customers WHERE email = :email";
+$sql = "SELECT * FROM users WHERE email = :email";
 $placeholders = array(':email' => $email);
 
 Database::query($sql, $placeholders);
@@ -48,6 +48,7 @@ unset($_SESSION['customer']['password']);
 
 $_SESSION['messages']['login_success'] = "You have successfully logged in.";
 $_SESSION['messages']['user'] = $customer['username'];
+$_SESSION['messages']['loggedin'] = true;
 header('Location: ../../index.php');
 exit();
 

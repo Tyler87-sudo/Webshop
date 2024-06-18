@@ -8,13 +8,59 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<?php 
-require_once "../dev/src/Database/Database.php";
-include "../dev/templates/header.inc.php";
+<?php
+session_start();
 
-Database::query("SELECT * FROM orders WHERE user_id = :user_id");
-Database::bind(':user_id', $_SESSION['user_id']);
-$orders = Database::getAll();
+require_once "../dev/src/Database/Database.php";
+require_once "../dev/templates/header.inc.php";
+require_once "../dev/src/helpers/sessionmanager.php";
+
+if (isset($_SESSION['messages']['loggedin'])) {
+    {
+        if ($_SESSION['messages']['loggedin'] == true) {
+            if (!headers_sent()) {
+                setMessage('login-messages', 'De winkelwagen is alleen te zien indien u bent ingelogd. Log a.u.b. in...');
+                header('Location: ./login.php');
+                exit();
+            } else {
+                die('Pagina kan niet getoond worden als u niet bent ingelogd');
+            }
+        }
+    }
+}
+
+
+
+Database::query("SELECT 
+      `cart_items`.`id`, 
+      `cart_items`.`cart_id`, 
+      `cart_items`.`product_id`, 
+      `cart_items`.`amount`,
+      `cart`.`customer_id`,
+      `products`.`product_type`,
+      `products`.`product_name`,
+      `products`.`product_description`,
+      `products`.`price`,
+      `products`.`product_image_url`,
+     (`cart_items`.`amount` * `products`.`price`) AS `product_total`
+   FROM `cart_items`
+   LEFT JOIN `products` ON `products`.`id` = `cart_items`.`product_id`
+   LEFT JOIN `cart` ON `cart`.`id` = `cart_items`.`cart_id`
+   WHERE `cart`.`customer_id` = :customer_id AND `cart`.`ordered` = 0", [":customer_id" => user_id()]);
+
+
+$cart_items = Database::getAll();
+$cart_total_amount = 0;
+$cart_total_cost = 0.0;
+$shipping_cost = 0.0;
+
+
+foreach ($cart_items as $cart_item) {
+    $cart_total_amount += intval($cart_item->amount);
+    $cart_total_cost += floatval($cart_item->product_total);
+}
+$order_total = $cart_total_cost + $shipping_cost;
+
 ?>
 
 <body>

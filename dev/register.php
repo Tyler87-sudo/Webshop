@@ -46,7 +46,7 @@ if (isset($_SESSION['messages']['error'])) {
                 <label for="passwordConfirm"><strong>Confirm Password</strong></label>
                 <input type="password" id="passwordConfirm" name="passwordConfirm" required>
                 <br><br><br>
-                <button  type="submit" onclick="" id="registerButton"><b>Register</b></button>
+                <button  type="submit" id="registerButton"><b>Register</b></button>
             </form>
         </div>
     </main>
