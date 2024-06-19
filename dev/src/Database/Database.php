@@ -43,5 +43,9 @@ class Database {
 
         return self::$dbStatement->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function getLastInsertId() {
+        return self::$dbStatement->lastInsertId();
+    }
 }
 

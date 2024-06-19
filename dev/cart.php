@@ -15,7 +15,14 @@ require_once "../dev/src/Database/Database.php";
 require_once "../dev/templates/header.inc.php";
 require_once "../dev/src/helpers/Auth.php";
 
-Database::query("SELECT 
+
+echo "<h1>" . $_SESSION['cart_items'] . "</h1>";
+echo "<h1>" . $_SESSION['cart'] . "</h1>" ;
+echo "<h1>" . $_SESSION['cart_product_id'] . "</h1>";
+
+$customer_id = user_id();
+
+$sql = "SELECT 
       `cart_items`.`id`, 
       `cart_items`.`cart_id`, 
       `cart_items`.`product_id`, 
@@ -29,7 +36,9 @@ Database::query("SELECT
    FROM `cart_items`
    LEFT JOIN `products` ON `products`.`id` = `cart_items`.`product_id`
    LEFT JOIN `cart` ON `cart`.`id` = `cart_items`.`cart_id`
-   WHERE `cart`.`customer_id` = :customer_id AND `cart`.`ordered` = 0", [":customer_id" => user_id()]);
+   WHERE `cart`.`customer_id` = :customer_id AND `cart`.`ordered` = 0";
+
+Database::query($sql, [":customer_id" => user_id()]);
 
 $cart_items = Database::getAll();
 $cart_total_amount = 0;
@@ -39,8 +48,11 @@ $shipping_cost = 0.0;
 foreach ($cart_items as $cart_item) {
     $cart_total_amount += intval($cart_item['amount']);
     $cart_total_cost += floatval($cart_item['product_total']);
+    echo "<h1>" . $cart_item . "</h1>";
+    echo "<h1>" . $cart_item['product_id'] . "</h1>";
 }
 $order_total = $cart_total_cost + $shipping_cost;
+
 
 ?>
 
