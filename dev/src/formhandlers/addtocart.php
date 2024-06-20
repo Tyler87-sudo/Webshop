@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit();
 }
 
-if(!isset($_POST['product_id']) || !isset($_POST['quantity'])) {
+if (!isset($_POST['product_id']) || !isset($_POST['quantity'])) {
     header('Location: ../../index.php');
     exit();
 }
@@ -25,20 +25,18 @@ if ($customer_id === 0) {
 }
 
 $sql = 'SELECT id FROM cart WHERE customer_id = :customer_id AND ordered = 0';
-$placeholders = [ ':customer_id' => $customer_id ];
+$placeholders = [':customer_id' => $customer_id];
 
 Database::query($sql, $placeholders);
-$cart = Database::getAll();
+$cart = Database::get();
 
-$_SESSION['cart'] = $cart['id'];
-$_SESSION['cart_product_id'] = $cart['product_id'];
-
-if (count($cart) === 0) {
+if (empty($cart)) {
+    // If no cart exists, create one
     $sql = 'INSERT INTO cart (customer_id, ordered) VALUES (:customer_id, 0)';
-    Database::query($sql, [ ':customer_id' => $customer_id ]);
+    Database::query($sql, [':customer_id' => $customer_id]);
     $cart_id = Database::getLastInsertId();
 } else {
-    $cart_id = $cart[0]['id'];
+    $cart_id = $cart['id'];
 }
 
 $sql = 'SELECT id, amount FROM cart_items WHERE cart_id = :cart_id AND product_id = :product_id';
@@ -48,25 +46,28 @@ $placeholders = [
 ];
 
 Database::query($sql, $placeholders);
-$cart_item = Database::getAll();
-$_SESSION['cart_items'] = $cart_item[0]['product_id'];
+$cart_item = Database::get();
 
-if (count($cart_item) === 0) {
-    $sql = 'INSERT INTO cart_items (cart_id, product_id, amount) VALUES (:cart_id, :product_id, :amount)';
+if (empty($cart_item)) {
+    $sql = 'INSERT INTO cart_items (cart_id, product_id, amount, customer_id) VALUES (:cart_id, :product_id, :amount, :customer_id)';
     $placeholders = [
         ':cart_id' => $cart_id,
         ':product_id' => $product_id,
-        ':amount' => $quantity
+        ':amount' => $quantity,
+        ':customer_id' => $customer_id
     ];
 } else {
-    $sql = 'UPDATE cart_items SET amount = amount + :amount WHERE product_id = :product_id';
+    $sql = 'UPDATE cart_items SET amount = amount + :amount WHERE id = :id';
     $placeholders = [
         ':amount' => $quantity,
-        ':id' => $cart_item[0]['id']
+        ':id' => $cart_item['id']
     ];
 }
 
 Database::query($sql, $placeholders);
+
+$_SESSION['cart'] = $cart_id;
+$_SESSION['cart_product_id'] = $product_id;
 
 header('Location: ../../cart.php');
 exit();

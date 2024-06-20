@@ -45,7 +45,11 @@ class Database {
     }
 
     public static function getLastInsertId() {
-        return self::$dbStatement->lastInsertId();
+        if (is_null(self::$dbConnection)) {
+            return null;
+        }
+
+        return self::$dbConnection->lastInsertId();
     }
 }
 

@@ -11,49 +11,55 @@
 <?php
 session_start();
 
-require_once "../dev/src/Database/Database.php";
-require_once "../dev/templates/header.inc.php";
-require_once "../dev/src/helpers/Auth.php";
+require_once 'src/Database/Database.php';
+require_once 'src/helpers/Auth.php';
 
-
-echo "<h1>" . $_SESSION['cart_items'] . "</h1>";
-echo "<h1>" . $_SESSION['cart'] . "</h1>" ;
-echo "<h1>" . $_SESSION['cart_product_id'] . "</h1>";
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login.php');
+    exit();
+}
 
 $customer_id = user_id();
+$cart_id = isset($_SESSION['cart']) ? $_SESSION['cart'] : 0;
+
+//if ($customer_id === 0 || $cart_id === 0) {
+//    echo "No items in the cart.";
+//    exit();
+//}
 
 $sql = "SELECT 
-      `cart_items`.`id`, 
-      `cart_items`.`cart_id`, 
-      `cart_items`.`product_id`, 
-      `cart_items`.`amount`,
-      `cart`.`customer_id`,
-      `products`.`product_name`,
-      `products`.`product_specs`,
-      `products`.`price`,
-      `products`.`product_image_url`,
-     (`cart_items`.`amount` * `products`.`price`) AS `product_total`
-   FROM `cart_items`
-   LEFT JOIN `products` ON `products`.`id` = `cart_items`.`product_id`
-   LEFT JOIN `cart` ON `cart`.`id` = `cart_items`.`cart_id`
-   WHERE `cart`.`customer_id` = :customer_id AND `cart`.`ordered` = 0";
+      cart_items.id, 
+      cart_items.cart_id, 
+      cart_items.product_id, 
+      cart_items.amount,
+      products.product_name,
+      products.product_specs,
+      products.price,
+      products.product_image_url,
+      (cart_items.amount * products.price) AS product_total
+   FROM cart_items
+   LEFT JOIN products ON products.product_id = cart_items.product_id
+   WHERE cart_items.cart_id = :cart_id
+    GROUP BY `cart_items`.`product_id`";
 
-Database::query($sql, [":customer_id" => user_id()]);
+Database::query($sql, [":cart_id" => $cart_id]);
+
 
 $cart_items = Database::getAll();
 $cart_total_amount = 0;
 $cart_total_cost = 0.0;
 $shipping_cost = 0.0;
 
+//echo '<pre>';
+//print_r($cart_items);
+//echo '</pre>';
+
 foreach ($cart_items as $cart_item) {
     $cart_total_amount += intval($cart_item['amount']);
     $cart_total_cost += floatval($cart_item['product_total']);
-    echo "<h1>" . $cart_item . "</h1>";
-    echo "<h1>" . $cart_item['product_id'] . "</h1>";
 }
+
 $order_total = $cart_total_cost + $shipping_cost;
-
-
 ?>
 
 <body>
@@ -62,11 +68,11 @@ $order_total = $cart_total_cost + $shipping_cost;
     <?php if (count($cart_items) > 0): ?>
         <?php foreach ($cart_items as $cart_item) : ?>
             <div class="product">
-                <img src="<?= $cart_item['product_image_url']?>" class="productImg" style="width: 10vw; height: 20vh;">
-                <h3 class="productName"><?= $cart_item['product_name']?></h3>
-                <p class="description"><?= $cart_item['product_specs']?></p>
-                <p class="orderQuantity">Quantity: <?= $cart_item['amount']?></p>
-                <p class="orderTotal">Total: $<?= number_format($cart_item['product_total'], 2)?></p>
+                <img src="<?= $cart_item['product_image_url'] ?>" class="productImg" style="width: 10vw; height: 20vh;">
+                <h3 class="productName"><?= $cart_item['product_name'] ?></h3>
+                <p class="description"><?= $cart_item['product_specs'] ?></p>
+                <p class="orderQuantity">Amount: <?= $cart_item['amount'] ?></p>
+                <p class="orderTotal">Total: $<?= number_format($cart_item['product_total'], 2) ?></p>
             </div>
             <br>
         <?php endforeach; ?>
