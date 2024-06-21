@@ -15,17 +15,31 @@ session_start();
 require_once "../dev/templates/header.inc.php";
 require_once "../dev/src/helpers/Auth.php";
 
-if (isset($_SESSION['messages']['loggedin']) && $_SESSION['messages']['loggedin'] === true) {
-    echo "<h1>" . "You are already logged in, " . $_SESSION['messages']['user'] . "!" . "</h1>";
-}
-
 
 if (isset($_SESSION['messages']['passworderror'])) {
     echo "<p>" . $_SESSION['messages']['passworderror'] . "</p>";
     unset($_SESSION['messages']['passworderror']);
 }
+
+
+if (array_key_exists('button1', $_POST)) {
+    button1();
+}
+function button1()
+{
+    session_unset();
+    session_destroy();
+}
+
+if (isset($_SESSION['messages']['registered']) && $_SESSION['messages']['registered'] === true) {
+    echo "<p>" . "You have been succesfully registered, you can now login" . "</p>";
+    unset($_SESSION['messages']['registered']);
+};
+
 ?>
     <!-- main start -->
+
+<?php if (!isset($_SESSION['messages']['loggedin'])): ?>
 </div>
     <main>
         <br><br><br>
@@ -49,5 +63,17 @@ if (isset($_SESSION['messages']['passworderror'])) {
     </main>
     <!-- main eind -->
 </body>
+
+<?php else: ?>
+
+    <div class="loggedIn">
+        <h1>You are already logged in!</h1>
+    </div>
+    <form method="post">
+        <input type="submit" name="button1"
+               class="confirm-button" value="Logout" />
+    </form>
+
+<?php endif ?>
 
 </html>

@@ -82,6 +82,7 @@ $order_total = $cart_total_cost + $shipping_cost;
             <p><strong>Shipping Cost:</strong> $<?= number_format($shipping_cost, 2) ?></p>
             <p><strong>Order Total:</strong> $<?= number_format($order_total, 2) ?></p>
         </div>
+
     <?php else: ?>
         <p>You have no items in your cart.</p>
     <?php endif; ?>

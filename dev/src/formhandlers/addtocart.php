@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once '../Database/Database.php';
-require_once '../helpers/Auth.php';
+require_once '../../src/Database/Database.php';
+require_once '../../src/helpers/Auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header('Location: ../index.php');

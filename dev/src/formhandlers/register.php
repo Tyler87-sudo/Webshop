@@ -49,6 +49,8 @@ $placeholders = [
 
 Database::query($sql, $placeholders);
 
-header('Location: ../../index.php');
+$_SESSION['messages']['registered'] = true;
+
+header('Location: ../../login.php');
 exit();
 ?>
